@@ -28,10 +28,27 @@ public class BrickLayout {
         }
     }
 
-    public void doOneBrick() {
+ public void doOneBrick() {
         if (bricks.size() != 0) {
             Brick b = bricks.remove(0);
-            // put this brick into the 2D array
+            int dropPosition = -1;
+            for(int i = brickLayout.length-1; i >= 0 ;i--){
+                boolean canPlace = true;
+                for (int j = b.getStart(); j <= b.getEnd();j++){
+                    if(brickLayout[i][j] == 1){
+                        canPlace = false;
+                    }
+                }
+                if(canPlace){
+                    dropPosition = i;
+                }
+            }
+            if(dropPosition != -1){
+                for(int column = b.getStart();column<=b.getEnd();column++){
+                    brickLayout[dropPosition][column] = 1;
+                }
+                b.setHeight(dropPosition);
+            }
         }
     }
 
