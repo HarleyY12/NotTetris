@@ -28,7 +28,6 @@ public class BrickLayout {
         }
     }
 
-
     public void doOneBrick() {
         if (bricks.size() != 0) {
             Brick b = bricks.remove(0);
