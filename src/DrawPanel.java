@@ -7,10 +7,10 @@ import java.util.ArrayList;
 public class DrawPanel extends JPanel implements MouseListener {
 
     private boolean[][] grid;
-
+    private BrickLayout layout;
     public DrawPanel() {
         this.addMouseListener(this);
-        randomizeGrid();
+        layout = new BrickLayout("src/bricks", 40, false);
 
     }
 
@@ -37,10 +37,10 @@ public class DrawPanel extends JPanel implements MouseListener {
         for (int c = 0; c < 40; c++) {
             for (int r = 0; r < 30; r++) {
                 g.drawRect(x, y, 20, 20);
-                if (grid[r][c]) {
-                    g2.setColor(Color.RED);
-                    g2.fillRect(x, y, 20, 20);
-                    g2.setColor(Color.BLACK);
+                if (layout.checkBrickSpot(r, c)) {
+                    g.setColor(Color.RED);
+                    g.fillRect(x, y, 20, 20);
+                    g.setColor(Color.BLACK);
                 }
                 y += 25;
             }
@@ -52,8 +52,8 @@ public class DrawPanel extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        randomizeGrid();
-    }
+        layout.doOneBrick();
+        repaint();    }
 
     @Override
     public void mousePressed(MouseEvent e) {
