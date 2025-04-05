@@ -20,7 +20,7 @@ public class BrickLayout {
             Brick b = new Brick(start, end);
             bricks.add(b);
         }
-        brickLayout = new int[bricks.size()][cols];
+        brickLayout = new int[30][cols];
         if (dropAllBricks) {
             while (bricks.size() != 0) {
                 doOneBrick();
