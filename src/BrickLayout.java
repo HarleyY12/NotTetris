@@ -28,62 +28,34 @@ public class BrickLayout {
         }
     }
 
-    public void doOneBrick() {
+   public void doOneBrick() {
+        if (bricks.size() == 0) return;
+        Brick b = bricks.remove(0);
+        int dropPosition = -1;
+        boolean hitObstacle = false;
 
-        if (bricks.size() != 0) {
-            Brick b = bricks.remove(0);
-            int dropPosition = -1;
-            boolean hitObstacle = false;
-            for (int i = 0; i < brickLayout.length && !hitObstacle; i++) {
-                boolean canPlace = true;
-                for (int j = b.getStart(); j <= b.getEnd(); j++) {
-                    if (brickLayout[i][j] == 1) {
-                        canPlace = false;
-                    }
-                }
-                if (canPlace) {
-                    dropPosition = i;
-                } else {
-                    hitObstacle = true;
-                }
-                if (dropPosition != -1) {
-                    for (int column = b.getStart(); column <= b.getEnd(); column++) {
-                        brickLayout[dropPosition][column] = 1;
-                    }
-                    b.setHeight(dropPosition);
+        for (int i = 0; i < brickLayout.length && !hitObstacle; i++) {
+            boolean canPlace = true;
+            for (int j = b.getStart(); j <= b.getEnd(); j++) {
+                if (brickLayout[i][j] == 1) {
+                    canPlace = false;
                 }
             }
+            if (canPlace) {
+                dropPosition = i;
+            } else {
+                hitObstacle = true;
+            }
+        }
+        if (dropPosition != -1) {
+            for (int column = b.getStart(); column <= b.getEnd(); column++) {
+                brickLayout[dropPosition][column] = 1;
+            }
+            b.setHeight(dropPosition);
         }
     }
 
 
-
-
-
-
-//        if (bricks.size() != 0) {
-//            Brick b = bricks.remove(0);
-//            int dropPosition = -1;
-//            for (int i = brickLayout.length - 1; i >= 0; i--) {
-//                boolean canPlace = true;
-//
-//                for (int j = b.getStart(); j <= b.getEnd(); j++) {
-//                    if (brickLayout[i][j] == 1) {
-//                        canPlace = false;
-//                    }
-//                }
-//                if (canPlace && dropPosition == -1) {
-//                    dropPosition = i;
-//                }
-//            }
-//
-//            if (dropPosition != -1) {
-//                for (int column = b.getStart(); column <= b.getEnd(); column++) {
-//                    brickLayout[dropPosition][column] = 1;
-//                }
-//                b.setHeight(dropPosition);
-//            }
-//        }
 
 
     public ArrayList<String> getFileData(String fileName) {
