@@ -32,7 +32,6 @@ public class DrawPanel extends JPanel implements MouseListener {
         int y = 10;
 
         Graphics2D g2 = (Graphics2D)g;
-        g2.setColor(Color.BLUE);
 
         for (int c = 0; c < 40; c++) {
             for (int r = 0; r < 30; r++) {
