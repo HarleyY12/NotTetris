@@ -8,6 +8,7 @@ public class BrickLayout {
     private ArrayList<Brick> bricks;
     private int[][] brickLayout;
     private int cols;
+    private Brick fallingBrick;
 
     public BrickLayout(String fileName, int cols, boolean dropAllBricks) {
         this.cols = cols;
@@ -26,6 +27,36 @@ public class BrickLayout {
                 doOneBrick();
             }
         }
+    }
+    public void updateBricks(){
+        if (fallingBrick == null && bricks.size() > 0){
+            fallingBrick = bricks.remove(0);
+        }if (fallingBrick != null) {
+            int row = fallingBrick.getFallingRow();
+            boolean canFall = true;
+            if (row + 1 >= brickLayout.length) {
+                canFall = false;
+            }
+            if (canFall) {
+                for (int col = fallingBrick.getStart(); col <= fallingBrick.getEnd(); col++) {
+                    if (brickLayout[row + 1][col] == 1) {
+                        canFall = false;
+                    }
+                }
+            }
+            if (canFall) {
+                fallingBrick.moveDown();
+            } else {
+                int r = fallingBrick.getFallingRow();
+                for (int c = fallingBrick.getStart(); c <= fallingBrick.getEnd(); c++) {
+                    brickLayout[r][c] = 1;
+                }
+                fallingBrick = null;
+            }
+        }
+    }
+    public Brick getFallingBrick(){
+        return fallingBrick;
     }
 
    public void doOneBrick() {
