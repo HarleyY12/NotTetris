@@ -2,11 +2,22 @@ public class Brick {
     private int start;
     private int end;
     private int height;
+    private int fallingRow;
 
     public Brick(int start, int end) {
         this.start = start;
         this.end = end;
         this.height = 0;
+        this.fallingRow = 0;
+    }
+    public int getFallingRow(){
+        return fallingRow;
+    }
+    public void setFallingRow(int fallingRow){
+        this.fallingRow = this.fallingRow + 1;
+    }
+    public void moveDown(){
+        this.fallingRow = this.fallingRow + 1;
     }
 
     public int getStart() {
