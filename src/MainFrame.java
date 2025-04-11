@@ -1,10 +1,11 @@
 import javax.swing.JFrame;
 
+
 public class MainFrame extends JFrame implements Runnable {
+
 
     private DrawPanel p;
     private Thread windowThread;
-
     public MainFrame(String display) {
         super(display);
         int frameWidth = 1000;
@@ -16,7 +17,6 @@ public class MainFrame extends JFrame implements Runnable {
         this.setLocation(100, 10);
         this.setVisible(true);
         startThread();
-
     }
 
     public void startThread() {
@@ -26,9 +26,20 @@ public class MainFrame extends JFrame implements Runnable {
 
     public void run() {
         while (true) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            p.update();
             p.repaint();
         }
     }
+
+
+
+
 }
+
 
 
